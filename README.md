@@ -37,7 +37,7 @@ func main() {
 }
 
 ```
-
+### For Local Development
 ```
 func main() {
     // initializes a stacktrace array
