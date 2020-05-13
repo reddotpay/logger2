@@ -9,12 +9,14 @@ func doSomeStuff() {
 	
 	// adds an info-level entry to stacktrace array
 	logger2.Info(
+		"summary",
 		map[string]interface{}{
 			"ValA": "A",
 		},
 		logger2.WhereAmI())
 	//adds an error-level entry to stacktrace
 	logger2.Error(
+		"summary",
 		map[string]interface{}{
 			"ValA": "A",
 		},

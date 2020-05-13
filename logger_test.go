@@ -54,6 +54,7 @@ func doSomeStuff() {
 
 	logger2.Client.Debug("the debug stuff is hererererererererre", zap.String("d", "debugggggg"))
 	logger2.Info(
+		"summarize",
 		map[string]interface{}{
 			"ValA": "A",
 		},

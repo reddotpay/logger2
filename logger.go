@@ -62,20 +62,21 @@ func InitStackTrace() {
 }
 
 // AppendStackTrace ...
-func appendStackTrace(stackType string, detail interface{}, caller string) {
+func appendStackTrace(stackType, summary string, detail interface{}, caller string) {
 	STA = append(STA, &StackTrace{
-		Type:   stackType,
-		Detail: detail,
-		Caller: []string{caller},
+		Type:    stackType,
+		Detail:  detail,
+		Summary: summary,
+		Caller:  []string{caller},
 	})
 }
 
 // Error appends error to stack trace array
-func Error(detail interface{}, caller string) {
-	appendStackTrace("error", detail, caller)
+func Error(summary string, detail interface{}, caller string) {
+	appendStackTrace("error", summary, detail, caller)
 }
 
 // Info appends error to stack trace array
-func Info(detail interface{}, caller string) {
-	appendStackTrace("info", detail, caller)
+func Info(summary string, detail interface{}, caller string) {
+	appendStackTrace("info", summary, detail, caller)
 }
