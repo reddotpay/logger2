@@ -136,6 +136,13 @@ func mask(str string, size int) (response string) {
 
 // maskFirstMLastN ...
 func maskFirstMLastN(str string, M, N int) (response string) {
+	if len(str) < M {
+		M = len(str)
+	}
+
+	if M+N > len(str) {
+		N = 0
+	}
 	firstM := str[:M]
 	lastN := str[len(str)-N:]
 	nib := len(str) - M - N
