@@ -152,7 +152,7 @@ func maskFirstMLastN(str string, M, N int) (response string) {
 }
 
 // masks email
-// hello@gmail.com -> hel**@gmail.com
+// hello@gmail.com -> hel**@gmail.com, abb@gmail.com -> abb@gmail.com
 func maskEmail(email string) (response string) {
 	var (
 		user   string
@@ -163,8 +163,13 @@ func maskEmail(email string) (response string) {
 	domain = split[1]
 
 	if lengthUser := len(user); lengthUser >= 0 {
+		chopper := 3
 		repeater := lengthUser - 3
-		user = fmt.Sprintf("%s%s", user[0:3], strings.Repeat("*", repeater))
+		if repeater < 0 {
+			repeater = 0
+			chopper = len(email)
+		}
+		user = fmt.Sprintf("%s%s", user[0:chopper], strings.Repeat("*", repeater))
 	}
 	return fmt.Sprintf("%s@%s", user, domain)
 }
