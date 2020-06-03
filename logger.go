@@ -2,6 +2,7 @@ package logger2
 
 import (
 	"os"
+	"time"
 
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
@@ -68,6 +69,7 @@ func appendStackTrace(stackType, summary string, detail interface{}, caller stri
 		Detail:  detail,
 		Summary: summary,
 		Caller:  []string{caller},
+		Time:    time.Now().Format(time.RFC3339Nano),
 	})
 }
 

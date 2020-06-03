@@ -8,6 +8,7 @@ type StackTrace struct {
 	Summary string      `json:"summary,omitempty"`
 	Detail  interface{} `json:"detail,omitempty"`
 	Caller  interface{} `json:"caller"`
+	Time    string      `json:"time"`
 }
 
 // StackTraceArray list of StackTrace
