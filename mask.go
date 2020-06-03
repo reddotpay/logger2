@@ -167,7 +167,7 @@ func maskEmail(email string) (response string) {
 		repeater := lengthUser - 3
 		if repeater < 0 {
 			repeater = 0
-			chopper = len(email)
+			chopper = len(user)
 		}
 		user = fmt.Sprintf("%s%s", user[0:chopper], strings.Repeat("*", repeater))
 	}
