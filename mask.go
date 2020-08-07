@@ -32,6 +32,7 @@ func MaskCard(s string) string {
 			case "cvv",
 				"credit_card_cvv",
 				"cardcvc",
+				"password",
 				"securitycode":
 				if value, ok := v.(string); ok {
 					m[k] = mask(value, len(value))
@@ -68,7 +69,7 @@ func MaskCard(s string) string {
 		newValues := url.Values{}
 		for k, v := range values {
 			switch strings.ToLower(k) {
-			case "cvv", "credit_card_cvv", "cardcvc", "securitycode":
+			case "cvv", "credit_card_cvv", "cardcvc", "securitycode", "password":
 				newValues[k] = []string{mask(v[0], len(v[0]))}
 			case "number", "cardnumber", "cardnum", "cardno", "accountnumber", "card_no":
 				// newValues[k] = []string{mask(v[0], 4)}
@@ -104,12 +105,12 @@ func MaskCard(s string) string {
 	}
 
 	// Check if string is XML and mask card
-	r := regexp.MustCompile(`(?i)<(number|cardnumber|cardnum|cardno|accountnumber)>(\d+)<\/(number|cardnumber|cardnum|cardno|accountnumber)>`)
+	r := regexp.MustCompile(`(?i)<(number|password|cardnumber|cardnum|cardno|accountnumber)>(\d+)<\/(number|cardnumber|cardnum|cardno|accountnumber)>`)
 	if m := r.FindStringSubmatch(s); len(m) == 4 {
 		s = r.ReplaceAllString(s, fmt.Sprintf("<%s>%s</%s>", m[1], maskFirstMLastN(m[2], 6, 4), m[3]))
 	}
 
-	r = regexp.MustCompile(`(?i)<(cvv|securitycode|cvNumber)>(\d{3,4})<\/(cvv|securitycode|cvNumber)>`)
+	r = regexp.MustCompile(`(?i)<(cvv|password|securitycode|cvNumber)>(\d{3,4})<\/(cvv|securitycode|cvNumber)>`)
 	if m := r.FindStringSubmatch(s); len(m) == 4 {
 		s = r.ReplaceAllString(s, fmt.Sprintf("<%s>%s</%s>", m[1], mask(m[2], len(m[2])), m[3]))
 	}
